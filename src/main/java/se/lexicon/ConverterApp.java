@@ -2,6 +2,8 @@ package main.java.se.lexicon;
 
 import java.util.Scanner;
 import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConverterApp {
 
@@ -15,6 +17,10 @@ public class ConverterApp {
 
     private static final double CM_PER_METER = 100.0;
     private static final double METERS_PER_KILOMETER = 1000.0;
+
+    // Stores conversion history for this session
+    private final List<String> conversionHistory = new ArrayList<>();
+
 
     public static void main(String[] args) {
         ConverterApp app = new ConverterApp();
@@ -55,6 +61,7 @@ public class ConverterApp {
             }
         }
 
+        displayConversionHistory();
         System.out.println("Goodbye!");
     }
 
@@ -90,6 +97,8 @@ public class ConverterApp {
                     "Result: %.2f SEK = %.2f USD%n",
                     sek, usd
             );
+            conversionHistory.add(String.format(Locale.US, "%.2f SEK       = %.2f USD", sek, usd
+            ));
         } else if (choice == 2) {
             System.out.print("Enter amount in SEK: ");
             double sek = scanner.nextDouble();
@@ -101,6 +110,8 @@ public class ConverterApp {
                     "Result: %.2f SEK = %.2f EUR%n",
                     sek, eur
             );
+            conversionHistory.add(String.format(Locale.US, "%.2f SEK       = %.2f EUR", sek, eur
+            ));
         } else {
             System.out.println("Invalid currency conversion option.");
         }
@@ -126,6 +137,11 @@ public class ConverterApp {
                     "Result: %.2f C = %.2f F%n",
                     celsius, fahrenheit
             );
+            conversionHistory.add(String.format(
+                    Locale.US,
+                    "%.2f C          = %.2f F",
+                    celsius, fahrenheit
+            ));
         } else if (choice == 2) {
             System.out.print("Enter temperature in Fahrenheit: ");
             double fahrenheit = scanner.nextDouble();
@@ -137,6 +153,11 @@ public class ConverterApp {
                     "Result: %.2f F = %.2f C%n",
                     fahrenheit, celsius
             );
+            conversionHistory.add(String.format(
+                    Locale.US,
+                    "%.2f F          = %.2f C",
+                    fahrenheit, celsius
+            ));
         } else {
             System.out.println("Invalid temperature conversion option.");
         }
@@ -162,6 +183,11 @@ public class ConverterApp {
                     "Result: %.2f cm = %.2f m%n",
                     centimeters, meters
             );
+            conversionHistory.add(String.format(
+                    Locale.US,
+                    "%.2f cm         = %.2f m",
+                    centimeters, meters
+            ));
         } else if (choice == 2) {
             System.out.print("Enter length in meters: ");
             double meters = scanner.nextDouble();
@@ -173,6 +199,11 @@ public class ConverterApp {
                     "Result: %.2f m = %.2f km%n",
                     meters, kilometers
             );
+            conversionHistory.add(String.format(
+                    Locale.US,
+                    "%.2f m          = %.2f km",
+                    meters, kilometers
+            ));
         } else {
             System.out.println("Invalid length conversion option.");
         }
@@ -202,6 +233,21 @@ public class ConverterApp {
 
     private double metersToKilometers(double meters) {
         return meters / METERS_PER_KILOMETER;
+    }
+
+    private void displayConversionHistory() {
+        System.out.println("\n=== Conversion History ===");
+
+        if (conversionHistory.isEmpty()) {
+            System.out.println("No conversions performed.");
+        } else {
+            for (int i = 0; i < conversionHistory.size(); i++) {
+                System.out.printf("%d.  %s%n", i + 1, conversionHistory.get(i));
+            }
+        }
+
+        System.out.println("==========================");
+        System.out.println("Total conversions: " + conversionHistory.size());
     }
 
 }
