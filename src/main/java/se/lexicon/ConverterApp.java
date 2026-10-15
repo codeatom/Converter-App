@@ -71,7 +71,47 @@ public class ConverterApp {
 
 
     private void handleCurrencyConverter(Scanner scanner) {
+        System.out.println("\n--- Currency Converter ---");
+        System.out.println("Convert:");
+        System.out.println("  1. SEK to USD");
+        System.out.println("  2. SEK to EUR");
+        System.out.print("Your choice: ");
 
+        int choice = scanner.nextInt();
+
+        if (choice == 1) {
+            System.out.print("Enter amount in SEK: ");
+            double sek = scanner.nextDouble();
+
+            double usd = sekToUsd(sek);
+
+            System.out.printf(
+                    Locale.US,
+                    "Result: %.2f SEK = %.2f USD%n",
+                    sek, usd
+            );
+        } else if (choice == 2) {
+            System.out.print("Enter amount in SEK: ");
+            double sek = scanner.nextDouble();
+
+            double eur = sekToEur(sek);
+
+            System.out.printf(
+                    Locale.US,
+                    "Result: %.2f SEK = %.2f EUR%n",
+                    sek, eur
+            );
+        } else {
+            System.out.println("Invalid currency conversion option.");
+        }
+    }
+
+    private double sekToUsd(double sek) {
+        return sek / SEK_TO_USD_RATE;
+    }
+
+    private double sekToEur(double sek) {
+        return sek / SEK_TO_EUR_RATE;
     }
 
     private void handleTemperatureConverter(Scanner scanner) {
