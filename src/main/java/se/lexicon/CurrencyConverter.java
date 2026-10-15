@@ -2,11 +2,15 @@ package main.java.se.lexicon;
 
 import java.util.Locale;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class CurrencyConverter {
 
     private static final double SEK_TO_USD_RATE = 10.87;
     private static final double SEK_TO_EUR_RATE = 11.32;
+    private static final DateTimeFormatter TIMESTAMP_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public String convert(Scanner scanner) {
         System.out.println("\n--- Currency Converter ---");
@@ -46,10 +50,15 @@ public class CurrencyConverter {
                     sek, usd
             );
 
+            System.out.println(
+                    "Converted at: "
+                            + LocalDateTime.now().format(TIMESTAMP_FORMATTER)
+            );
+
             return String.format(
                     Locale.US,
-                    "%.2f SEK       = %.2f USD",
-                    sek, usd
+                    "%.2f SEK = %.2f USD  | Converted at: %s",
+                    sek, usd, LocalDateTime.now().format(TIMESTAMP_FORMATTER)
             );
 
         } else {
@@ -69,10 +78,15 @@ public class CurrencyConverter {
                     sek, eur
             );
 
+            System.out.println(
+                    "Converted at: "
+                            + LocalDateTime.now().format(TIMESTAMP_FORMATTER)
+            );
+
             return String.format(
                     Locale.US,
-                    "%.2f SEK       = %.2f EUR",
-                    sek, eur
+                    "%.2f SEK = %.2f EUR  | Converted at: %s",
+                    sek, eur, LocalDateTime.now().format(TIMESTAMP_FORMATTER)
             );
         }
     }

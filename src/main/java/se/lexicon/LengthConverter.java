@@ -2,11 +2,15 @@ package main.java.se.lexicon;
 
 import java.util.Locale;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class LengthConverter {
 
     private static final double CM_PER_METER = 100.0;
     private static final double METERS_PER_KILOMETER = 1000.0;
+    private static final DateTimeFormatter TIMESTAMP_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public String convert(Scanner scanner) {
         System.out.println("\n--- Length Converter ---");
@@ -46,10 +50,15 @@ public class LengthConverter {
                     centimeters, meters
             );
 
+            System.out.println(
+                    "Converted at: "
+                            + LocalDateTime.now().format(TIMESTAMP_FORMATTER)
+            );
+
             return String.format(
                     Locale.US,
-                    "%.2f cm         = %.2f m",
-                    centimeters, meters
+                    "%.2f cm = %.2f m  | Converted at: %s",
+                    centimeters, meters, LocalDateTime.now().format(TIMESTAMP_FORMATTER)
             );
 
         } else {
@@ -71,8 +80,8 @@ public class LengthConverter {
 
             return String.format(
                     Locale.US,
-                    "%.2f m          = %.2f km",
-                    meters, kilometers
+                    "%.2f m = %.2f km  | Converted at: %s",
+                    meters, kilometers, LocalDateTime.now().format(TIMESTAMP_FORMATTER)
             );
         }
     }

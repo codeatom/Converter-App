@@ -2,12 +2,16 @@ package main.java.se.lexicon;
 
 import java.util.Locale;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class TemperatureConverter {
 
     private static final double FAHRENHEIT_MULTIPLIER = 9.0 / 5.0;
     private static final double CELSIUS_MULTIPLIER = 5.0 / 9.0;
     private static final double FAHRENHEIT_OFFSET = 32.0;
+    private static final DateTimeFormatter TIMESTAMP_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public String convert(Scanner scanner) {
         System.out.println("\n--- Temperature Converter ---");
@@ -47,10 +51,15 @@ public class TemperatureConverter {
                     celsius, fahrenheit
             );
 
+            System.out.println(
+                    "Converted at: "
+                            + LocalDateTime.now().format(TIMESTAMP_FORMATTER)
+            );
+
             return String.format(
                     Locale.US,
-                    "%.2f C          = %.2f F",
-                    celsius, fahrenheit
+                    "%.2f C = %.2f F  | Converted at: %s",
+                    celsius, fahrenheit, LocalDateTime.now().format(TIMESTAMP_FORMATTER)
             );
 
         } else {
@@ -70,10 +79,15 @@ public class TemperatureConverter {
                     fahrenheit, celsius
             );
 
+            System.out.println(
+                    "Converted at: "
+                            + LocalDateTime.now().format(TIMESTAMP_FORMATTER)
+            );
+
             return String.format(
                     Locale.US,
-                    "%.2f F          = %.2f C",
-                    fahrenheit, celsius
+                    "%.2f F = %.2f C  | Converted at: %s",
+                    fahrenheit, celsius, LocalDateTime.now().format(TIMESTAMP_FORMATTER)
             );
         }
     }

@@ -52,10 +52,21 @@ public class ConverterApp {
                 }
 
                 if (running) {
-                    System.out.print("\nContinue? (yes/no): ");
-                    String answer = scanner.next().trim();
+                    String answer;
 
-                    running = answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y");
+                    while (true) {
+                        System.out.print("\nContinue? (yes/no): ");
+                        answer = scanner.next().trim();
+
+                        if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
+                            break;
+                        } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")) {
+                            running = false;
+                            break;
+                        } else {
+                            System.out.println("Invalid input. Please enter (yes/no) ");
+                        }
+                    }
                 }
             }
         }
