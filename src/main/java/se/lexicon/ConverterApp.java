@@ -106,6 +106,78 @@ public class ConverterApp {
         }
     }
 
+    private void handleTemperatureConverter(Scanner scanner) {
+        System.out.println("\n--- Temperature Converter ---");
+        System.out.println("Convert:");
+        System.out.println("  1. Celsius to Fahrenheit");
+        System.out.println("  2. Fahrenheit to Celsius");
+        System.out.print("Your choice: ");
+
+        int choice = scanner.nextInt();
+
+        if (choice == 1) {
+            System.out.print("Enter temperature in Celsius: ");
+            double celsius = scanner.nextDouble();
+
+            double fahrenheit = celsiusToFahrenheit(celsius);
+
+            System.out.printf(
+                    Locale.US,
+                    "Result: %.2f C = %.2f F%n",
+                    celsius, fahrenheit
+            );
+        } else if (choice == 2) {
+            System.out.print("Enter temperature in Fahrenheit: ");
+            double fahrenheit = scanner.nextDouble();
+
+            double celsius = fahrenheitToCelsius(fahrenheit);
+
+            System.out.printf(
+                    Locale.US,
+                    "Result: %.2f F = %.2f C%n",
+                    fahrenheit, celsius
+            );
+        } else {
+            System.out.println("Invalid temperature conversion option.");
+        }
+    }
+
+    private void handleLengthConverter(Scanner scanner) {
+        System.out.println("\n--- Length Converter ---");
+        System.out.println("Convert:");
+        System.out.println("  1. Centimeters to Meters");
+        System.out.println("  2. Meters to Kilometers");
+        System.out.print("Your choice: ");
+
+        int choice = scanner.nextInt();
+
+        if (choice == 1) {
+            System.out.print("Enter length in centimeters: ");
+            double centimeters = scanner.nextDouble();
+
+            double meters = centimetersToMeters(centimeters);
+
+            System.out.printf(
+                    Locale.US,
+                    "Result: %.2f cm = %.2f m%n",
+                    centimeters, meters
+            );
+        } else if (choice == 2) {
+            System.out.print("Enter length in meters: ");
+            double meters = scanner.nextDouble();
+
+            double kilometers = metersToKilometers(meters);
+
+            System.out.printf(
+                    Locale.US,
+                    "Result: %.2f m = %.2f km%n",
+                    meters, kilometers
+            );
+        } else {
+            System.out.println("Invalid length conversion option.");
+        }
+    }
+
     private double sekToUsd(double sek) {
         return sek / SEK_TO_USD_RATE;
     }
@@ -114,12 +186,22 @@ public class ConverterApp {
         return sek / SEK_TO_EUR_RATE;
     }
 
-    private void handleTemperatureConverter(Scanner scanner) {
-
+    private double celsiusToFahrenheit(double celsius) {
+        return celsius * FAHRENHEIT_MULTIPLIER
+                + FAHRENHEIT_OFFSET;
     }
 
-    private void handleLengthConverter(Scanner scanner) {
+    private double fahrenheitToCelsius(double fahrenheit) {
+        return (fahrenheit - FAHRENHEIT_OFFSET)
+                * CELSIUS_MULTIPLIER;
+    }
 
+    private double centimetersToMeters(double centimeters) {
+        return centimeters / CM_PER_METER;
+    }
+
+    private double metersToKilometers(double meters) {
+        return meters / METERS_PER_KILOMETER;
     }
 
 }
